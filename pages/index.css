@@ -10,6 +10,7 @@
 
 .page {
   max-width: 1280px;
+  min-width: 320px;
   min-height: 100vh;
   margin: 0 auto;
   background: #000;
@@ -92,7 +93,128 @@
 
 /* CONTENT */
 
+.content {
+  /* display: flex; */
+}
 
+.profile {
+  max-width: 880px;
+  min-height: 120px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
 
+.profile__wrapper {
+  display: flex;
+}
 
+.profile__avatar {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 100%;
+} 
 
+.profile__info {
+  max-width: 348px;
+  min-height: 73px;
+  display: grid;
+  grid-template-rows: 55px 18px;
+  margin: auto 0;
+  margin-left: 30px;
+}
+
+.profile__title {
+  max-width: 306px;
+  min-height: 39px;
+  color: #fff;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  margin: 0;
+  padding-right: 18px;
+  /* del */
+  grid-row: 1 / 2;
+  /* align-self: center; */
+}
+
+.profile__subtitle {
+  color: #fff;
+  max-width: 336px;
+  min-height: 18px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+  /* del */
+  grid-row: 2 / 3;
+  align-self: center;
+}
+
+.profile__edit-btn {
+  cursor: pointer;
+  background-image: url(../images/icons/edit_button.svg);
+  background-repeat: no-repeat;
+  background-color: #000;
+  background-position: center;
+  border: 1px solid #fff;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  /* del */
+  grid-column: 2 / 3;
+  justify-self: end;
+  align-self: center;
+}
+
+.profile__add-btn {
+  cursor: pointer;
+  background-image: url(../images/icons/add_button.svg);
+  background-repeat: no-repeat;
+  background-color: #000;
+  background-position: center;
+  border: 1px solid #fff;
+  width: 150px;
+  height: 50px;
+  padding: 0;
+  margin: auto 0;
+}
+
+/* DELETE */
+
+.elements {
+  display: grid;
+  /* Три колонки */
+  grid-template-columns: auto auto auto;
+  /* Два ряда */
+  grid-template-rows: auto auto;
+  /* Автоматическое размещение в ряд */
+  grid-auto-flow: row;
+  /* Отступы между ячейками */
+  gap: 10px;
+
+  /* Для красоты */
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f1f1f1;
+}
+
+.item {
+  min-height: 50px;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+  line-height: 1;
+  background-color: lightblue;
+}
+
+.item3 {
+  /* Занимает один ряд и
+  растягивается на две колонки */
+  grid-column: span 2;
+  background-color: pink;
+}
