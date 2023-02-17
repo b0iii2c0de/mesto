@@ -14,7 +14,8 @@
   min-height: 100vh;
   margin: 0 auto;
   background: #000;
-  scroll-behavior: smooth;
+  box-sizing: border-box;
+  /* scroll-behavior: smooth; */
 	font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
 	/* просто копируй эту пачку в каждый проект ↓ */
 	/* cглаживание шрифтов для разных браузеров ↓ */
@@ -60,9 +61,9 @@
 
 /* TABLET */
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .header {
-    max-width: 650px;
+    max-width: 700px; 
   }
 }
 
@@ -70,9 +71,9 @@
 
 @media (max-width: 500px) {
   .header {
-    max-width: 100%;
+    max-width: 425px;
     min-height: 56px;
-    margin: 28px 0 42px;
+    margin: 28px auto 42px;
   }
 }
 
@@ -98,34 +99,74 @@
 }
 
 .profile {
+  /* min-height: 120px; */
   max-width: 880px;
-  min-height: 120px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .profile {
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 426px) {
+  .profile {
+    flex-direction: column;
+    justify-content: center;
+    gap: 36px;
+  }
 }
 
 .profile__wrapper {
   display: flex;
 }
 
+@media (max-width: 426px) {
+  .profile__wrapper {
+    flex-direction: column;
+    gap: 26px;
+  }
+}
+
 .profile__avatar {
   max-width: 120px;
   max-height: 120px;
   border-radius: 100%;
-} 
+}
+
+@media (max-width: 426px) {
+  .profile__avatar {
+    margin: auto;
+  }
+}
+
 
 .profile__info {
   max-width: 348px;
   min-height: 73px;
   display: grid;
-  grid-template-rows: 55px 18px;
+  grid-template-rows: 55px 24px;
   margin: auto 0;
   margin-left: 30px;
 }
 
+@media (max-width: 426px) {
+  .profile__info {
+    max-width: 282px;
+    min-height: 54px;
+    margin: auto;
+    position: relative;
+    top: 0;
+    left: 15px;
+    grid-template-rows: 36px 24px;
+  }
+}
+
 .profile__title {
-  max-width: 306px;
+  max-width: 294px;
   min-height: 39px;
   color: #fff;
   font-family: 'Inter';
@@ -137,7 +178,18 @@
   padding-right: 18px;
   /* del */
   grid-row: 1 / 2;
-  /* align-self: center; */
+}
+
+@media (max-width: 426px) {
+  .profile__title {
+    max-width: 189px;
+    min-height: 26px;
+    font-size: 27px;
+    line-height: 33px;
+    text-align: center;
+    padding: 0;
+    /* align-self: center; */
+  }
 }
 
 .profile__subtitle {
@@ -152,7 +204,18 @@
   margin: 0;
   /* del */
   grid-row: 2 / 3;
-  align-self: center;
+  align-self: end;
+}
+
+@media (max-width: 426px) {
+  .profile__subtitle {
+    max-width: 282px;
+    min-height: 14px;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    /* align-self: end; */
+  }
 }
 
 .profile__edit-btn {
@@ -171,6 +234,14 @@
   align-self: center;
 }
 
+@media (max-width: 426px) {
+  .profile__edit-btn {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+  }
+}
+
 .profile__add-btn {
   cursor: pointer;
   background-image: url(../images/icons/add_button.svg);
@@ -182,6 +253,14 @@
   height: 50px;
   padding: 0;
   margin: auto 0;
+}
+
+@media (max-width: 426px) {
+  .profile__add-btn {
+    background-image: url(../images/icons/add_button_02.svg);
+    width: 282px;
+    align-self: center;
+  }
 }
 
 /* DELETE */
