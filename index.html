@@ -7,8 +7,8 @@
     <meta name="author" content="c0de b0iii">
     <link rel="icon" href="./images/logos/fav.png" type="images/x-icon">
     <link rel="stylesheet" href="./pages/index.css">
-    <script defer src="./script/index.js"></script>
-    <title>mesto</title>
+    <script defer src="./scripts/index.js"></script>
+    <title>Mesto</title>
 </head>
 <body class="page">
 
@@ -19,7 +19,7 @@
 
   <!-- CONTENT -->
   <main class="content">
-    <section class="profile">
+    <section class="profile" aria-label="Профиль">
       <did class="profile__wrapper">
         <img src="./images/content/profile_avatar.jpg" alt="Аватар" class="profile__avatar"></img>
       <div class="profile__info">
@@ -31,18 +31,59 @@
       <button class="profile__add-btn"></button>
     </section>
 
-    <!-- <section class="elements">
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item3"></div>
-      <div class="item"></div>
-    </section> -->
+    <section class="elements" aria-label="Посещённые Места">
+      <ul class="elements__grid">
+        <li class="elements__item">
+          <img src="./images/content/anapa.jpg" alt="Рио-де-Анапа" class="elements__img">
+          <div class="elements__wrapper">
+            <h2 class="elements__name">Рио-де-Анапа</h2>
+            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+          </div>
+        </li>
+        <li class="elements__item">
+          <img src="./images/content/baikal.jpg" alt="Байкал" class="elements__img">
+          <div class="elements__wrapper">
+            <h2 class="elements__name">Байкал</h2>
+            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+          </div>
+        </li>
+        <li class="elements__item">
+          <img src="./images/content/altai.jpg" alt="Алтай" class="elements__img">
+          <div class="elements__wrapper">
+            <h2 class="elements__name">Алтай</h2>
+            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+          </div>
+        </li>
+        <li class="elements__item">
+          <img src="./images/content/chechnya.jpg" alt="Чечня" class="elements__img">
+          <div class="elements__wrapper">
+            <h2 class="elements__name">Чечня</h2>
+            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+          </div>
+        </li>
+        <li class="elements__item">
+          <img src="./images/content/dagestan.jpg" alt="Дагестан" class="elements__img">
+          <div class="elements__wrapper">
+            <h2 class="elements__name">Дагестан</h2>
+            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+          </div>
+        </li>
+        <li class="elements__item">
+          <img src="./images/content/kamchatka.jpg" alt="Камчатский полуостров" class="elements__img">
+          <div class="elements__wrapper">
+            <h2 class="elements__name">Камчатский полуостров</h2>
+            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
   </main>
 
   <!-- POP-UP -->
-
+  
   <!-- FOOTER -->
   <footer class="footer">
+    <p class="footer__copyright">&copy; 2023. c0de b0iii</p>
   </footer>
 
 </body>
