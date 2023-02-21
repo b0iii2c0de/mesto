@@ -13,7 +13,7 @@
   min-width: 320px;
   min-height: 100vh;
   margin: 0 auto;
-  padding: 0 19px;
+  padding: 0 20px;
   background: #000;
   box-sizing: border-box;
   /* scroll-behavior: smooth; */
@@ -64,7 +64,7 @@
 
 @media (max-width: 768px) {
   .header {
-    max-width: 700px; 
+    max-width: 100%; 
   }
 }
 
@@ -111,7 +111,7 @@
 
 @media (max-width: 768px) {
   .profile {
-    max-width: 700px;
+    max-width: 100%;
   }
 }
 
@@ -234,6 +234,7 @@
   background-color: #000;
   background-position: center;
   border: 1px solid #fff;
+  border-radius: 10%;
   width: 24px;
   height: 24px;
   padding: 0;
@@ -241,6 +242,11 @@
   grid-column: 2 / 3;
   justify-self: end;
   align-self: center;
+  transition: opacity 0.2s ease;
+}
+
+.profile__edit-btn:hover {
+  opacity: 0.5;
 }
 
 @media (max-width: 426px) {
@@ -258,10 +264,16 @@
   background-color: #000;
   background-position: center;
   border: 1px solid #fff;
+  border-radius: 3%;
   width: 150px;
   height: 50px;
   padding: 0;
   margin: auto 0;
+  transition: opacity 0.2s ease;
+}
+
+.profile__add-btn:hover {
+  opacity: 0.5;
 }
 
 @media (max-width: 426px) {
@@ -296,7 +308,7 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #fff;
 }
 
@@ -345,13 +357,14 @@
   box-sizing: border-box;
   border: none;
   flex-shrink: 0;
+  transition: opacity 0.2s ease;
 }
 
 .elements__butt:hover {
-  background-image: url(../images/icons/heart_button_hover.svg);
+  opacity: 0.5;
 }
 /* 
-.elements__butt-liked {
+.elements_butt-liked {
   background-image: url(../images/icons/heart_button_active.svg);
 } */
 
@@ -387,3 +400,158 @@
 }
 
 /* POP-UP */
+
+.profiles-pop-up {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+}
+
+.pop-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s ease;
+  /* del or mod trans prop ↑ */
+}
+
+.pop-up_opened {
+  visibility: visible;
+  opacity: 3;
+  /* del or mod ↑ */
+}
+
+.pop-up__container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  gap: 55px;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 15px;
+  background-color: #fff;
+  width: 430px;
+  padding: 35px;
+}
+
+@media (max-width: 450px) {
+  .pop-up__container {
+    padding: 25px;
+    gap: 75px;
+  }
+}
+
+.pop-up__title {
+  max-width: 330px;
+  min-height: 23px;
+  margin: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000;
+}
+
+@media (max-width: 450px) {
+  .pop-up__title {
+    max-width: 238px;
+    min-height: 22px;
+    font-size: 18px;
+    line-height: 22px;
+    /* align-self: center; */
+  }
+}
+
+.pop-up__form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.pop-up__input {
+  display: block;
+  max-width: 358px;
+  min-height: 14px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  color: #000;
+  padding: 0;
+}
+
+.pop-up__sub-butt {
+  cursor: pointer;
+  max-width: 358px;
+  min-height: 50px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  /* text-align: center; */
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #000;
+  padding: 0;
+  margin-top: 18px;
+  transition: opacity 0.2s ease;
+}
+
+.pop-up__sub-butt:hover {
+  opacity: 0.5;
+}
+
+@media (max-width: 450px) {
+  .pop-up__sub-butt {
+    /* max-width: 238px; */
+    min-height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 15px;
+  }
+}
+
+.pop-up__close-butt {
+  display: block;
+  position: absolute;
+  top: -35px;
+  right: -35px;
+  background-image: url(../images/icons/close_icon_l.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.pop-up__close-butt:hover {
+  opacity: 0.5;
+}
+
+@media (max-width: 550px) {
+  .pop-up__close-butt {
+    width: 20px;
+    height: 20px;
+    right: 0px;
+  }
+}

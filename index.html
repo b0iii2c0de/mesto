@@ -37,42 +37,42 @@
           <img src="./images/content/anapa.jpg" alt="Рио-де-Анапа" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Рио-де-Анапа</h2>
-            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/content/baikal.jpg" alt="Байкал" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Байкал</h2>
-            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/content/altai.jpg" alt="Алтай" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Алтай</h2>
-            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/content/chechnya.jpg" alt="Чечня" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Чечня</h2>
-            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/content/dagestan.jpg" alt="Дагестан" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Дагестан</h2>
-            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/content/kamchatka.jpg" alt="Камчатский полуостров" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Камчатский полуостров</h2>
-            <button type="button" class="elements__butt elements__butt-liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
           </div>
         </li>
       </ul>
@@ -80,7 +80,18 @@
   </main>
 
   <!-- POP-UP -->
-  
+  <section class="profiles-pop-up pop-up pop-up_opened" aria-label="Модалка для редакции профиля">
+    <div class="pop-up__container">
+      <h2 class="pop-up__title">Редактировать профиль</h2>
+      <form action="" name="modal-form" class="pop-up__form">
+        <input type="text" class="pop-up__input" id="name" name="name">
+        <input type="text" class="pop-up__input" id="description" name="description">
+        <button type="submit" class="pop-up__sub-butt">Сохранить</button>
+      </form>
+      <button type="button" class="pop-up__close-butt" aria-label="Закрыть"></button>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer class="footer">
     <p class="footer__copyright">&copy; 2023. c0de b0iii</p>
