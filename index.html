@@ -7,7 +7,8 @@
     <meta name="author" content="c0de b0iii">
     <link rel="icon" href="./images/logos/fav.png" type="images/x-icon">
     <link rel="stylesheet" href="./pages/index.css">
-    <script defer src="./scripts/index.js"></script>
+    <script src="./scripts/index.js" defer></script>
+    <!-- Я знаю, что файл со скриптом нужно было оставить до закрывающего тега body, но я стараюсь привыкать к хорошим практикам, я выбирал между аттрибутами async и defer, предварительно ознакомившись с ними -->
     <title>Mesto</title>
 </head>
 <body class="page">
@@ -20,14 +21,14 @@
   <!-- CONTENT -->
   <main class="content">
     <section class="profile" aria-label="Профиль">
-      <did class="profile__wrapper">
-        <img src="./images/content/profile_avatar.jpg" alt="Аватар" class="profile__avatar"></img>
+      <div class="profile__wrapper">
+        <img src="./images/content/profile_avatar.jpg" alt="Аватар" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__title">Жак-Ив Кусто</h1>
-        <p class="profile__subtitle">Исследователь океана</p>
+        <p class="profile__subtitle">Исследователь пилоток</p>
         <button class="profile__edit-btn" type="button"></button>
       </div>
-      </did>
+      </div>
       <button class="profile__add-btn"></button>
     </section>
 
@@ -80,10 +81,10 @@
   </main>
 
   <!-- POP-UP -->
-  <section class="profiles-pop-up pop-up pop-up_opened" aria-label="Модалка для редакции профиля">
+  <section class="profiles-pop-up pop-up" aria-label="Модалка для редакции профиля">
     <div class="pop-up__container">
       <h2 class="pop-up__title">Редактировать профиль</h2>
-      <form action="" name="modal-form" class="pop-up__form">
+      <form name="modal-form" class="pop-up__form">
         <input type="text" class="pop-up__input" id="name" name="name">
         <input type="text" class="pop-up__input" id="description" name="description">
         <button type="submit" class="pop-up__sub-butt">Сохранить</button>

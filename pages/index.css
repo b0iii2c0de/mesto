@@ -16,7 +16,6 @@
   padding: 0 20px;
   background: #000;
   box-sizing: border-box;
-  /* scroll-behavior: smooth; */
 	font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
 	/* просто копируй эту пачку в каждый проект ↓ */
 	/* cглаживание шрифтов для разных браузеров ↓ */
@@ -478,7 +477,7 @@
 .pop-up__input {
   display: block;
   max-width: 358px;
-  min-height: 14px;
+  height: 27px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -487,6 +486,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  outline: none;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   color: #000;
