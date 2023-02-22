@@ -1,0 +1,18 @@
+.pop-up__container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  gap: 55px;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 15px;
+  background-color: #fff;
+  width: 430px;
+  padding: 35px;
+}
+@media (max-width: 450px) {
+  .pop-up__container {
+    padding: 25px;
+    gap: 75px;
+  }
+}
