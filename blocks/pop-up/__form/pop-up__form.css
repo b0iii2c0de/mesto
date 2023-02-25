@@ -3,3 +3,9 @@
   flex-direction: column;
   gap: 30px;
 }
+
+@media (max-width: 450px) {
+  .pop-up__form {
+    gap: 30px;
+  }
+}

@@ -17,10 +17,3 @@
 .elements__butt:hover {
   opacity: 0.5;
 }
-
-/* Я перенесу модиф. в отдельный файл в 5ом спринте */
-
-/* 
-.elements_butt-liked {
-  background-image: url(../../../images/icons/heart_button_active.svg);
-} */

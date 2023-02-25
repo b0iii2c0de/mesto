@@ -1,6 +1,5 @@
 .profile__info {
   max-width: 348px;
-  min-height: 73px;
   display: grid;
   grid-template-rows: 55px 24px;
   margin: auto 0;
@@ -9,11 +8,8 @@
 @media (max-width: 426px) {
   .profile__info {
     max-width: 282px;
-    min-height: 54px;
-    margin: auto;
-    position: relative;
-    top: 0;
-    left: 15px;
-    grid-template-rows: 36px 24px;
+    margin: 0;
+    margin-left: 27px;
+    grid-template-rows: 32px 24px;
   }
 }

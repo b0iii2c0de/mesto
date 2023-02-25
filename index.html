@@ -8,7 +8,6 @@
     <link rel="icon" href="./images/logos/fav.png" type="images/x-icon">
     <link rel="stylesheet" href="./pages/index.css">
     <script src="./scripts/index.js" defer></script>
-    <!-- Я знаю, что файл со скриптом нужно было оставить до закрывающего тега body, но я стараюсь привыкать к хорошим практикам, я выбирал между аттрибутами async и defer, предварительно ознакомившись с ними -->
     <title>Mesto</title>
 </head>
 <body class="page">
@@ -25,11 +24,11 @@
         <img src="./images/content/profile_avatar.jpg" alt="Аватар" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__title">Жак-Ив Кусто</h1>
-        <p class="profile__subtitle">Исследователь пилоток</p>
-        <button class="profile__edit-btn" type="button"></button>
+        <p class="profile__subtitle">Исследователь океана</p>
+        <button type="button" class="profile__edit-btn"></button>
       </div>
       </div>
-      <button class="profile__add-btn"></button>
+      <button type="button" class="profile__add-btn"></button>
     </section>
 
     <section class="elements" aria-label="Посещённые Места">
@@ -38,42 +37,42 @@
           <img src="./images/content/anapa.jpg" alt="Рио-де-Анапа" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Рио-де-Анапа</h2>
-            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/content/baikal.jpg" alt="Байкал" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Байкал</h2>
-            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/content/altai.jpg" alt="Алтай" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Алтай</h2>
-            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/content/chechnya.jpg" alt="Чечня" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Чечня</h2>
-            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/content/dagestan.jpg" alt="Дагестан" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Дагестан</h2>
-            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/content/kamchatka.jpg" alt="Камчатский полуостров" class="elements__img">
           <div class="elements__wrapper">
             <h2 class="elements__name">Камчатский полуостров</h2>
-            <button type="button" class="elements__butt elements__butt_liked" aria-label="Сирдешко"></button>
+            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
           </div>
         </li>
       </ul>
@@ -81,12 +80,12 @@
   </main>
 
   <!-- POP-UP -->
-  <section class="profiles-pop-up pop-up" aria-label="Модалка для редакции профиля">
+  <section class="pop-up" aria-label="Модалка для редакции профиля">
     <div class="pop-up__container">
       <h2 class="pop-up__title">Редактировать профиль</h2>
       <form name="modal-form" class="pop-up__form">
-        <input type="text" class="pop-up__input" id="name" name="name">
-        <input type="text" class="pop-up__input" id="description" name="description">
+        <input type="text" placeholder="Имя" class="pop-up__input" id="name" name="name">
+        <input type="text" placeholder="Род деятельности" class="pop-up__input" id="description" name="description">
         <button type="submit" class="pop-up__sub-butt">Сохранить</button>
       </form>
       <button type="button" class="pop-up__close-butt" aria-label="Закрыть"></button>

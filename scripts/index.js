@@ -1,5 +1,5 @@
 // Get the modal elements
-const modalWindow = document.querySelector(".profiles-pop-up");
+const modalWindow = document.querySelector(".pop-up");
 const submitPopupForm = modalWindow.querySelector(".pop-up__form");
 
 // Get profile values and input values

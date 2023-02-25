@@ -1,8 +1,7 @@
 .profile__subtitle {
   color: #fff;
   max-width: 336px;
-  min-height: 18px;
-  font-family: 'Inter';
+  font-family: inherit;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -18,10 +17,8 @@
 @media (max-width: 426px) {
   .profile__subtitle {
     max-width: 282px;
-    min-height: 14px;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    /* align-self: end; */
   }
 }

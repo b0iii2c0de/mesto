@@ -1,8 +1,8 @@
 .pop-up__close-butt {
   display: block;
   position: absolute;
-  top: -35px;
-  right: -35px;
+  top: -40px;
+  right: -40px;
   background-image: url(../../../images/icons/close_icon_l.svg);
   background-position: center;
   background-size: contain;
@@ -22,6 +22,7 @@
   .pop-up__close-butt {
     width: 20px;
     height: 20px;
-    right: 0px;
+    top: -36px;
+    right: -1px;
   }
 }
