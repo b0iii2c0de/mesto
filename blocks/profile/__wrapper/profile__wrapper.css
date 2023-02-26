@@ -6,6 +6,7 @@
   .profile__wrapper {
     flex-direction: column;
     align-self: center;
+    align-items: center;
     gap: 26px;
     margin: 0;
   }

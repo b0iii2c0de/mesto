@@ -4,13 +4,12 @@
   background-repeat: no-repeat;
   background-color: #000;
   background-position: center;
-  background-size: cover;
+  background-size: auto;
   border: 1px solid #fff;
-  border-radius: 10%;
+  box-sizing: border-box;
   width: 24px;
   height: 24px;
   padding: 0;
-  /* del */
   grid-column: 2 / 3;
   justify-self: end;
   align-self: center;
@@ -21,6 +20,7 @@
 }
 @media (max-width: 426px) {
   .profile__edit-btn {
+    background-image: url(../../../images/icons/edit_button_s.svg);
     width: 18px;
     height: 18px;
     margin-left: 10px;
