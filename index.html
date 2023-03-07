@@ -10,7 +10,6 @@
     <script src="./scripts/index.js" defer></script>
     <title>Mesto</title>
 </head>
-<!-- Товарищ, Алексей Блинов, напишите мне в тг @scumboiii, пожалуйста, или оставьте свой адрес. Мне хочется, Вам высказать лично всё то, что я о Ваших проверках думаю! -->
 <body class="page">
 
   <!-- HEADER -->
@@ -80,7 +79,7 @@
     </section>
   </main>
 
-  <!-- POP-UP -->
+  <!-- EDIT POP-UP -->
   <section class="pop-up" aria-label="Модалка для редакции профиля">
     <div class="pop-up__container">
       <h2 class="pop-up__title">Редактировать профиль</h2>
@@ -93,10 +92,44 @@
     </div>
   </section>
 
+  <!-- CARD POP-UP -->
+  <section class="pop-up" aria-label="Модалка для создания карточки">
+    <div class="pop-up__container">
+      <h2 class="pop-up__title">Новое место</h2>
+      <form class="pop-up__form" name="modal-form">
+        <input class="pop-up__input" type="text" id="place-name" name="place-name" placeholder="Название">
+        <input class="pop-up__input" type="text" id="img-link" name="img-link" placeholder="Cсылка на картинку">
+        <button type="submit" class="pop-up__sub-butt">Создать</button>
+      </form>
+      <button type="button" class="pop-up__close-butt" aria-label="Закрыть"></button>
+    </div>
+  </section>
+
+  <!-- IMG POP-UP -->
+  <section class="pop-up" aria-label="Картинка в полный размер">
+    <div class="pop-up__img-container">
+      <img class="pop-up__image" src="./images/content/" alt="none">
+      <p class="pop-up__caption"></p>
+      <button type="button" class="pop-up__close-butt" aria-label="Закрыть"></button>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer class="footer">
     <p class="footer__copyright">&copy; 2023. c0de b0iii</p>
   </footer>
+
+  <!-- TEMPLATE INJECTION -->
+  <template id="place-card">
+    <li class="elements__item">
+      <img class="elements__img" src="none" alt="none">
+      <button type="button" class="elements__bin" aria-label="Урна"></button>
+      <div class="elements__wrapper">
+        <h2 class="elements__name"></h2>
+        <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
+      </div>
+    </li>
+  </template>
 
 </body>
 </html>
