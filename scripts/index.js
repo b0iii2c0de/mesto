@@ -1,10 +1,9 @@
 // Get the modal elements
-const universalModal = document.querySelector('.pop-up');
 const profileModalWindow = document.querySelector(".profile-pop-up");
 const cardModalWindow = document.querySelector(".card-pop-up");
 const imgModalWindow = document.querySelector(".img-pop-up");
-const submitPopupForm = document.querySelector(".pop-up__form");
-const submitPopupCard = document.querySelector(".pop-up__form_submit");
+const profileForm = document.querySelector(".pop-up__form");
+const cardForm = document.querySelector(".pop-up__form_submit");
 
 // Get profile values and input values
 const profileTitle = document.querySelector(".profile__title");
@@ -23,7 +22,6 @@ const fullSizeImgCap = imgModalWindow.querySelector(".pop-up__caption");
 // Get buttons
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
-const modalCloseBtn = document.querySelector(".pop-up__close-butt");
 
 // Get template
 const placeCardTemplate = document.querySelector("#place-card").content;
@@ -87,7 +85,7 @@ const openImgModalWindow = (evt) => {
 // Function to handle card form submission
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-  const newCard = passNewCard(placeImgLinkIn.value, placeNameIn.value);
+  const newCard = creatCard(placeImgLinkIn.value, placeNameIn.value);
   cardsGrid.prepend(newCard);
   evt.target.reset();
   closeModal(cardModalWindow);
@@ -99,19 +97,19 @@ const deleteCard = (evt) => {
 };
 
 // Function to switch state of a button
-const toggleButt = (e) => {
+const toggleBtn = (e) => {
   e.target.classList.toggle("elements__butt_liked");
 };
 
 // Function to creat a new card
-const passNewCard = (link, name) => {
+const creatCard = (link, name) => {
   const placeCard = placeCardTemplate.querySelector(".elements__item").cloneNode(true);
   const cardImage = placeCard.querySelector(".elements__img");
   cardImage.src = link;
   cardImage.alt = name;
   placeCard.querySelector(".elements__name").textContent = name;
   cardImage.addEventListener("click", openImgModalWindow);
-  placeCard.querySelector(".elements__butt").addEventListener("click", toggleButt);
+  placeCard.querySelector(".elements__butt").addEventListener("click", toggleBtn);
   placeCard.querySelector(".elements__bin").addEventListener("click", deleteCard);
 
   return placeCard;
@@ -119,15 +117,15 @@ const passNewCard = (link, name) => {
 
 // Function to preload an array
 primeCards.forEach((item) => {
-  const elementCreatCard = passNewCard(item.link, item.name);
+  const elementCreatCard = creatCard(item.link, item.name);
   cardsGrid.prepend(elementCreatCard);
 });
 
 // Event listeners
 profileEditBtn.addEventListener("click", openProfileModalWindow);
 profileAddBtn.addEventListener("click", openCardModalWindow);
-submitPopupForm.addEventListener("submit", handleProfileFormSubmit);
-submitPopupCard.addEventListener("submit", handleCardFormSubmit);
+profileForm.addEventListener("submit", handleProfileFormSubmit);
+cardForm.addEventListener("submit", handleCardFormSubmit);
 
 // Close buttons functions
 const profileModalCloseBtn = profileModalWindow.querySelector(".pop-up__close-butt");
