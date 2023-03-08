@@ -4,7 +4,7 @@ const profileModalWindow = document.querySelector(".profile-pop-up");
 const cardModalWindow = document.querySelector(".card-pop-up");
 const imgModalWindow = document.querySelector(".img-pop-up");
 const submitPopupForm = document.querySelector(".pop-up__form");
-const submitPopupCard = document.querySelector(".pop-up_card-sub");
+const submitPopupCard = document.querySelector(".pop-up__form_submit");
 
 // Get profile values and input values
 const profileTitle = document.querySelector(".profile__title");
