@@ -1,44 +1,140 @@
 // Get the modal elements
-const modalWindow = document.querySelector(".pop-up");
-const submitPopupForm = modalWindow.querySelector(".pop-up__form");
+const universalModal = document.querySelector('.pop-up');
+const profileModalWindow = document.querySelector(".profile-pop-up");
+const cardModalWindow = document.querySelector(".card-pop-up");
+const imgModalWindow = document.querySelector(".img-pop-up");
+const submitPopupForm = document.querySelector(".pop-up__form");
+const submitPopupCard = document.querySelector(".pop-up_card-sub");
 
 // Get profile values and input values
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
-const nameInput = modalWindow.querySelector("#name");
-const descriptionInput = modalWindow.querySelector("#description");
+const nameInput = profileModalWindow.querySelector("#name");
+const descriptionInput = profileModalWindow.querySelector("#description");
+
+// Get card input values
+const placeNameIn = cardModalWindow.querySelector("#place-name");
+const placeImgLinkIn = cardModalWindow.querySelector("#img-link");
+
+// Get img element values
+const fullSizeImg = imgModalWindow.querySelector(".pop-up__image");
+const fullSizeImgCap = imgModalWindow.querySelector(".pop-up__caption");
 
 // Get buttons
 const profileEditBtn = document.querySelector(".profile__edit-btn");
-const profileCloseBtn = document.querySelector(".pop-up__close-butt");
+const profileAddBtn = document.querySelector(".profile__add-btn");
+const modalCloseBtn = document.querySelector(".pop-up__close-butt");
 
-// Open and close modal functions
-const openModal = () => modalWindow.classList.add("pop-up_opened");
-const closeModal = () => modalWindow.classList.remove("pop-up_opened");
+// Get template
+const placeCardTemplate = document.querySelector("#place-card").content;
+const cardsGrid = document.querySelector(".elements__grid");
+
+// An array of cards
+const primeCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const openModal = (modal) => modal.classList.add("pop-up_opened");
+const closeModal = (modal) => modal.classList.remove("pop-up_opened");
 
 // Function to fill in form with profile values
-const openModalWindow = () => {
+const openProfileModalWindow = () => {
   nameInput.value = profileTitle.textContent;
   descriptionInput.value = profileSubtitle.textContent;
-  openModal();
+  openModal(profileModalWindow);
 };
 
-// Function to handle form submission
-const handleSubmit = (event) => {
-  event.preventDefault();
+// Function to handle profile form submission
+const handleProfileFormSubmit = (evt) => {
+  evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = descriptionInput.value;
-  closeModal();
+  closeModal(profileModalWindow);
 };
 
-// Event listeners
-profileEditBtn.addEventListener("click", openModalWindow);
-profileCloseBtn.addEventListener("click", closeModal);
-submitPopupForm.addEventListener("submit", handleSubmit);
+// Functions to open card & img modal-windows
+const openCardModalWindow = () => openModal(cardModalWindow);
+const openImgModalWindow = (evt) => {
+  fullSizeImg.src = evt.target.src;
+  fullSizeImg.alt = evt.target.alt;
+  fullSizeImgCap.textContent = evt.target.alt;
+  openModal(imgModalWindow);
+};
 
-// Event listener to close modal when clicking outside of it
-modalWindow.addEventListener("click", (event) => {
-  if (event.target === modalWindow) {
-    closeModal();
-  }
+// Function to handle card form submission
+const handleCardFormSubmit = (evt) => {
+  evt.preventDefault();
+  const newCard = passNewCard(placeImgLinkIn.value, placeNameIn.value);
+  cardsGrid.prepend(newCard);
+  evt.target.reset();
+  closeModal(cardModalWindow);
+};
+
+// Function for deletion of a card
+const deleteCard = (evt) => {
+  evt.target.closest(".elements__item").remove();
+};
+
+// Function to switch state of a button
+const toggleButt = (e) => {
+  e.target.classList.toggle("elements__butt_liked");
+};
+
+// Function to creat a new card
+const passNewCard = (link, name) => {
+  const placeCard = placeCardTemplate.querySelector(".elements__item").cloneNode(true);
+  const cardImage = placeCard.querySelector(".elements__img");
+  cardImage.src = link;
+  cardImage.alt = name;
+  placeCard.querySelector(".elements__name").textContent = name;
+  cardImage.addEventListener("click", openImgModalWindow);
+  placeCard.querySelector(".elements__butt").addEventListener("click", toggleButt);
+  placeCard.querySelector(".elements__bin").addEventListener("click", deleteCard);
+
+  return placeCard;
+};
+
+// Function to preload an array
+primeCards.forEach((item) => {
+  const elementCreatCard = passNewCard(item.link, item.name);
+  cardsGrid.prepend(elementCreatCard);
 });
+
+// Event listeners
+profileEditBtn.addEventListener("click", openProfileModalWindow);
+profileAddBtn.addEventListener("click", openCardModalWindow);
+submitPopupForm.addEventListener("submit", handleProfileFormSubmit);
+submitPopupCard.addEventListener("submit", handleCardFormSubmit);
+
+// Close buttons functions
+const profileModalCloseBtn = profileModalWindow.querySelector(".pop-up__close-butt");
+profileModalCloseBtn.addEventListener("click", () => closeModal(profileModalWindow));
+
+const cardModalCloseBtn = cardModalWindow.querySelector(".pop-up__close-butt");
+cardModalCloseBtn.addEventListener("click", () => closeModal(cardModalWindow));
+
+const imgModalCloseBtn = imgModalWindow.querySelector(".pop-up__close-butt");
+imgModalCloseBtn.addEventListener("click", () => closeModal(imgModalWindow));

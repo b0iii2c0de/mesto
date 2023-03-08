@@ -13,6 +13,6 @@
   background: transparent url(../../../images/icons/bin_button.svg) center/contain no-repeat;
 }
 
-.elements__trashcan:hover {
+.elements__bin:hover {
   opacity: 0.5;
 }

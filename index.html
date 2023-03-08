@@ -32,55 +32,12 @@
     </section>
 
     <section class="elements" aria-label="Посещённые Места">
-      <ul class="elements__grid">
-        <li class="elements__item">
-          <img src="./images/content/anapa.jpg" alt="Рио-де-Анапа" class="elements__img">
-          <div class="elements__wrapper">
-            <h2 class="elements__name">Рио-де-Анапа</h2>
-            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img src="./images/content/baikal.jpg" alt="Байкал" class="elements__img">
-          <div class="elements__wrapper">
-            <h2 class="elements__name">Байкал</h2>
-            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img src="./images/content/altai.jpg" alt="Алтай" class="elements__img">
-          <div class="elements__wrapper">
-            <h2 class="elements__name">Алтай</h2>
-            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img src="./images/content/chechnya.jpg" alt="Чечня" class="elements__img">
-          <div class="elements__wrapper">
-            <h2 class="elements__name">Чечня</h2>
-            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img src="./images/content/dagestan.jpg" alt="Дагестан" class="elements__img">
-          <div class="elements__wrapper">
-            <h2 class="elements__name">Дагестан</h2>
-            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img src="./images/content/kamchatka.jpg" alt="Камчатский полуостров" class="elements__img">
-          <div class="elements__wrapper">
-            <h2 class="elements__name">Камчатский полуостров</h2>
-            <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
-          </div>
-        </li>
-      </ul>
+      <ul class="elements__grid"></ul>
     </section>
   </main>
 
-  <!-- EDIT POP-UP -->
-  <section class="pop-up" aria-label="Модалка для редакции профиля">
+  <!-- PROFILE POP-UP -->
+  <section class="profile-pop-up pop-up" aria-label="Модалка для редакции профиля">
     <div class="pop-up__container">
       <h2 class="pop-up__title">Редактировать профиль</h2>
       <form name="modal-form" class="pop-up__form">
@@ -93,12 +50,12 @@
   </section>
 
   <!-- CARD POP-UP -->
-  <section class="pop-up" aria-label="Модалка для создания карточки">
+  <section class="card-pop-up pop-up" aria-label="Модалка для создания карточки">
     <div class="pop-up__container">
       <h2 class="pop-up__title">Новое место</h2>
-      <form class="pop-up__form" name="modal-form">
+      <form class="pop-up__form pop-up_card-sub" name="modal-form">
         <input class="pop-up__input" type="text" id="place-name" name="place-name" placeholder="Название">
-        <input class="pop-up__input" type="text" id="img-link" name="img-link" placeholder="Cсылка на картинку">
+        <input class="pop-up__input" type="url" id="img-link" name="img-link" placeholder="Cсылка на картинку">
         <button type="submit" class="pop-up__sub-butt">Создать</button>
       </form>
       <button type="button" class="pop-up__close-butt" aria-label="Закрыть"></button>
@@ -106,7 +63,7 @@
   </section>
 
   <!-- IMG POP-UP -->
-  <section class="pop-up" aria-label="Картинка в полный размер">
+  <section class="img-pop-up pop-up" aria-label="Картинка в полный размер">
     <div class="pop-up__img-container">
       <img class="pop-up__image" src="./images/content/" alt="none">
       <p class="pop-up__caption"></p>
