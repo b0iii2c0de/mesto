@@ -9,61 +9,61 @@ const classSelectors = {
 };
 
 // Shows an error message next to an input field
-const displayInputError = (form, input, message, css) => {
+const displayInputError = (form, input, message, settings) => {
   const error = form.querySelector(`.${input.id}-error`);
-  input.classList.add(css.inputErrorClass);
+  input.classList.add(settings.inputErrorClass);
   error.textContent = message;
-  error.classList.add(css.inputErrorActiveClass);
+  error.classList.add(settings.inputErrorActiveClass);
 };
 
 // Hides an error message next to an input field
-const hideInputError = (form, input, css) => {
+const hideInputError = (form, input, settings) => {
   const error = form.querySelector(`.${input.id}-error`);
-  input.classList.remove(css.inputErrorClass);
-  error.classList.remove(css.inputErrorActiveClass);
+  input.classList.remove(settings.inputErrorClass);
+  error.classList.remove(settings.inputErrorActiveClass);
   error.textContent = "";
 };
 
 // Checks the validity of an input field and shows/hides error message accordingly
-const checkInputValidity = (form, input, css) => {
+const checkInputValidity = (form, input, settings) => {
   if (!input.validity.valid) {
     displayInputError(
       form,
       input,
       input.validationMessage,
-      css
+      settings
     );
   } else {
-    hideInputError(form, input, css);
+    hideInputError(form, input, settings);
   }
 };
 
 // Sets event listeners for all input fields in a form
-const setEventListeners = (form, css) => {
+const setEventListeners = (form, settings) => {
   const inputList = Array.from(
-    form.querySelectorAll(css.inputSelector)
+    form.querySelectorAll(settings.inputSelector)
   );
-  const button = form.querySelector(css.submitButtonSelector);
-  toggleButtonState(inputList, button, css);
+  const button = form.querySelector(settings.submitButtonSelector);
+  toggleButtonState(inputList, button, settings);
   // Resets the form and toggles button state when reset button is clicked
   form.addEventListener("reset", () => {
     setTimeout(() => {
-      toggleButtonState(inputList, button, css);
+      toggleButtonState(inputList, button, settings);
     }, 0);
   });
   // Listens for input events on all input fields and checks their validity
   inputList.forEach((input) => {
     input.addEventListener("input", function () {
-      checkInputValidity(form, input, css);
-      toggleButtonState(inputList, button, css);
+      checkInputValidity(form, input, settings);
+      toggleButtonState(inputList, button, settings);
     });
   });
 };
 
 // Enables validation on all forms with the specified selectors
-const enableValidation = (css) => {
-  const formList = Array.from(document.querySelectorAll(css.formSelector));
-  formList.forEach((form) => setEventListeners(form, css));
+const enableValidation = (settings) => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+  formList.forEach((form) => setEventListeners(form, settings));
 };
 
 // Checks if any input fields in the provided list are invalid
@@ -72,12 +72,12 @@ const hasInvalidInput = (inputList) => {
 };
 
 // Toggles the disabled/enabled state of a submit button based on input field validity
-const toggleButtonState = (inputList, button, css) => {
+const toggleButtonState = (inputList, button, settings) => {
   if (hasInvalidInput(inputList)) {
-    button.classList.add(css.inactiveButtonClass);
+    button.classList.add(settings.inactiveButtonClass);
     button.setAttribute("disabled", "");
   } else {
-    button.classList.remove(css.inactiveButtonClass);
+    button.classList.remove(settings.inactiveButtonClass);
     button.removeAttribute("disabled", "");
   }
 };

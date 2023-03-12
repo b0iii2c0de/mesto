@@ -63,11 +63,6 @@ const closeByPressEsc = (evt) => {
   }
 };
 
-const showModal = (modal) => {
-  modal.classList.add("pop-up_opened");
-  document.addEventListener("keydown", closeByPressEsc);
-};
-
 // Universal open/close functions
 const openModal = (modal) => {
   modal.classList.add("pop-up_opened");
