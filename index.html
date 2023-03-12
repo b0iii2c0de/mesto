@@ -8,6 +8,7 @@
     <link rel="icon" href="./images/logos/fav.png" type="images/x-icon">
     <link rel="stylesheet" href="./pages/index.css">
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validate.js" defer></script>
     <title>Mesto</title>
 </head>
 <body class="page">
@@ -40,9 +41,15 @@
   <section class="profile-pop-up pop-up" aria-label="Модалка для редакции профиля">
     <div class="pop-up__container">
       <h2 class="pop-up__title">Редактировать профиль</h2>
-      <form name="modal-form" class="pop-up__form">
-        <input type="text" placeholder="Имя" class="pop-up__input" id="name" name="name">
-        <input type="text" placeholder="Род деятельности" class="pop-up__input" id="description" name="description">
+      <form name="profile-edit-form" class="pop-up__form" novalidate>
+        <label>
+          <input type="text" placeholder="Имя" class="pop-up__input" id="name" name="name" minlength="2" maxlength="40" required>
+          <span class="pop-up__input-error name-error"></span>
+        </label>
+        <label>
+          <input type="text" placeholder="Род деятельности" class="pop-up__input" id="description" name="description" minlength="2" maxlength="200" required>
+          <span class="pop-up__input-error description-error"></span>
+        </label>
         <button type="submit" class="pop-up__sub-butt">Сохранить</button>
       </form>
       <button type="button" class="pop-up__close-butt" aria-label="Закрыть"></button>
@@ -53,9 +60,15 @@
   <section class="card-pop-up pop-up" aria-label="Модалка для создания карточки">
     <div class="pop-up__container">
       <h2 class="pop-up__title">Новое место</h2>
-      <form class="pop-up__form pop-up__form_submit" name="modal-form">
-        <input class="pop-up__input" type="text" id="place-name" name="place-name" placeholder="Название">
-        <input class="pop-up__input" type="url" id="img-link" name="img-link" placeholder="Cсылка на картинку">
+      <form class="pop-up__form pop-up__form_submit" name="place-add-form" novalidate>
+        <label>
+          <input class="pop-up__input" type="text" id="place-name" name="place-name" placeholder="Название" minlength="2" maxlength="30" required>
+          <span class="pop-up__input-error place-name-error"></span>
+        </label>
+        <label>
+          <input class="pop-up__input" type="url" id="img-link" name="img-link" placeholder="Cсылка на картинку" required>
+          <span class="pop-up__input-error img-link-error"></span>
+        </label>
         <button type="submit" class="pop-up__sub-butt">Создать</button>
       </form>
       <button type="button" class="pop-up__close-butt" aria-label="Закрыть"></button>

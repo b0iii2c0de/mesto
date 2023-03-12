@@ -55,8 +55,29 @@ const primeCards = [
   }
 ];
 
-const openModal = (modal) => modal.classList.add("pop-up_opened");
-const closeModal = (modal) => modal.classList.remove("pop-up_opened");
+// Functions to close modals when pressing escape button
+const closeByPressEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    const openedModal = document.querySelector('.pop-up_opened');
+    closeModal(openedModal);
+  }
+};
+
+const showModal = (modal) => {
+  modal.classList.add("pop-up_opened");
+  document.addEventListener("keydown", closeByPressEsc);
+};
+
+// Universal open/close functions
+const openModal = (modal) => {
+  modal.classList.add("pop-up_opened");
+  document.addEventListener("keydown", closeByPressEsc);
+};
+
+const closeModal = (modal) => {
+  modal.classList.remove("pop-up_opened");
+  document.addEventListener("keydown", closeByPressEsc);
+}
 
 // Function to fill in form with profile values
 const openProfileModalWindow = () => {
@@ -121,13 +142,13 @@ primeCards.forEach((item) => {
   cardsGrid.prepend(elementCreatCard);
 });
 
-// Event listeners
+// Event listeners to open and submit modals
 profileEditBtn.addEventListener("click", openProfileModalWindow);
 profileAddBtn.addEventListener("click", openCardModalWindow);
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 cardForm.addEventListener("submit", handleCardFormSubmit);
 
-// Close buttons functions
+// Close buttons functions to close modals
 const profileModalCloseBtn = profileModalWindow.querySelector(".pop-up__close-butt");
 profileModalCloseBtn.addEventListener("click", () => closeModal(profileModalWindow));
 
@@ -136,3 +157,14 @@ cardModalCloseBtn.addEventListener("click", () => closeModal(cardModalWindow));
 
 const imgModalCloseBtn = imgModalWindow.querySelector(".pop-up__close-butt");
 imgModalCloseBtn.addEventListener("click", () => closeModal(imgModalWindow));
+
+// An array with applied on it forEach method to close modals when click appears outside of a modals
+const modalWindows = [profileModalWindow, cardModalWindow, imgModalWindow];
+
+modalWindows.forEach(modalWindow => {
+  modalWindow.addEventListener('click', event => {
+    if (event.target === modalWindow) {
+      closeModal(modalWindow);
+    }
+  });
+});
