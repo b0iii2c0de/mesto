@@ -1,30 +1,42 @@
+// Import modules
+import Card from "./components/Card.js";
+import FormValidator from "./components/FormValidator.js";
+
+// Import a varible used in closing fns
+import {imgModalWindow} from "./components/Card.js";
+
+// selectors
+const classSelectors = {
+  typeErrorModeration: "pop-up__input_type-error",
+  errorActiveModeration: "pop-up__input-error_active",
+  inputElement: ".pop-up__input",
+  saveBtnElement: ".pop-up__sub-butt",
+  saveBtnElementOff: "pop-up__sub-butt_disabled",
+};
+
 // Get the modal elements
 const profileModalWindow = document.querySelector(".profile-pop-up");
 const cardModalWindow = document.querySelector(".card-pop-up");
-const imgModalWindow = document.querySelector(".img-pop-up");
+// const imgModalWindow = document.querySelector(".img-pop-up"); // del, used in Card class
 const profileForm = document.querySelector(".pop-up__form");
-const cardForm = document.querySelector(".pop-up__form_submit");
+const profileFormEdit = document.querySelector(".pop-up__form-edit"); // used in formVal fn
+const cardForm = document.querySelector(".pop-up__form_submit"); // used in formVal fn
 
 // Get profile values and input values
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
-const nameInput = profileModalWindow.querySelector("#name");
+const nameInput = profileModalWindow.querySelector("#name"); // +
 const descriptionInput = profileModalWindow.querySelector("#description");
 
 // Get card input values
 const placeNameIn = cardModalWindow.querySelector("#place-name");
 const placeImgLinkIn = cardModalWindow.querySelector("#img-link");
 
-// Get img element values
-const fullSizeImg = imgModalWindow.querySelector(".pop-up__image");
-const fullSizeImgCap = imgModalWindow.querySelector(".pop-up__caption");
-
 // Get buttons
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
 
 // Get template
-const placeCardTemplate = document.querySelector("#place-card").content;
 const cardsGrid = document.querySelector(".elements__grid");
 
 // An array of cards
@@ -55,6 +67,13 @@ const primeCards = [
   }
 ];
 
+// new instances to validate forms
+const formValidatorEdit = new FormValidator(classSelectors, profileFormEdit);
+formValidatorEdit.enableValidation();
+
+const formValidatorAdd = new FormValidator(classSelectors, cardForm);
+formValidatorAdd.enableValidation();
+
 // Functions to close modals when pressing escape button
 const closeByPressEsc = (evt) => {
   if (evt.key === 'Escape') {
@@ -64,7 +83,7 @@ const closeByPressEsc = (evt) => {
 };
 
 // Universal open/close functions
-const openModal = (modal) => {
+export const openModal = (modal) => {
   modal.classList.add("pop-up_opened");
   document.addEventListener("keydown", closeByPressEsc);
 };
@@ -91,51 +110,33 @@ const handleProfileFormSubmit = (evt) => {
 
 // Functions to open card & img modal-windows
 const openCardModalWindow = () => openModal(cardModalWindow);
-const openImgModalWindow = (evt) => {
-  fullSizeImg.src = evt.target.src;
-  fullSizeImg.alt = evt.target.alt;
-  fullSizeImgCap.textContent = evt.target.alt;
-  openModal(imgModalWindow);
-};
 
 // Function to handle card form submission
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-  const newCard = creatCard(placeImgLinkIn.value, placeNameIn.value);
-  cardsGrid.prepend(newCard);
+  const newCard = {
+    name: placeNameIn.value,
+    link: placeImgLinkIn.value
+  };
+  renderCard(newCard);
   evt.target.reset();
   closeModal(cardModalWindow);
 };
 
-// Function for deletion of a card
-const deleteCard = (evt) => {
-  evt.target.closest(".elements__item").remove();
+// function to create a new card
+const createCard = (data, cardId) => {
+  const card = new Card(data, cardId);
+  return card.createCard();
 };
 
-// Function to switch state of a button
-const toggleBtn = (e) => {
-  e.target.classList.toggle("elements__butt_liked");
+// function to render new card
+const renderCard = (card) => {
+  const placeCard = createCard(card, "#place-card");
+  cardsGrid.prepend(placeCard);
 };
 
-// Function to creat a new card
-const creatCard = (link, name) => {
-  const placeCard = placeCardTemplate.querySelector(".elements__item").cloneNode(true);
-  const cardImage = placeCard.querySelector(".elements__img");
-  cardImage.src = link;
-  cardImage.alt = name;
-  placeCard.querySelector(".elements__name").textContent = name;
-  cardImage.addEventListener("click", openImgModalWindow);
-  placeCard.querySelector(".elements__butt").addEventListener("click", toggleBtn);
-  placeCard.querySelector(".elements__bin").addEventListener("click", deleteCard);
-
-  return placeCard;
-};
-
-// Function to preload an array
-primeCards.forEach((item) => {
-  const elementCreatCard = creatCard(item.link, item.name);
-  cardsGrid.prepend(elementCreatCard);
-});
+// ↑
+primeCards.forEach(renderCard);
 
 // Event listeners to open and submit modals
 profileEditBtn.addEventListener("click", openProfileModalWindow);
