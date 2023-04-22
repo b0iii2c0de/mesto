@@ -85,14 +85,14 @@ const closeByPressEsc = (evt) => {
 };
 
 // Universal open/close functions
-export const openModal = (modal) => {
+const openModal = (modal) => {
   modal.classList.add("pop-up_opened");
   document.addEventListener("keydown", closeByPressEsc);
 };
 
 const closeModal = (modal) => {
   modal.classList.remove("pop-up_opened");
-  document.addEventListener("keydown", closeByPressEsc);
+  document.removeEventListener("keydown", closeByPressEsc);
 }
 
 // Function to fill in form with profile values
