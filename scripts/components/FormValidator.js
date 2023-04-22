@@ -45,12 +45,20 @@ export default class FormValidator {
     });
   }
 
+  // method to clean errors and button control
+  resetValidation() {
+    this._stateBtnToggle();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    });
+  }
+
   // method to check imput validity
   _invalidInput() {
     return this._inputList.some((inputElement) => {return !inputElement.validity.valid});
   }
 
-  // method to switch the state of an button element
+  // method to switch the state of a button element
   _stateBtnToggle() {
     if (this._invalidInput(this._inputList)) {
       this._btnElement.classList.add(this._saveBtnElementOff);

@@ -1,16 +1,11 @@
-import {openModal} from "../index.js";
-
-export const imgModalWindow = document.querySelector(".img-pop-up");
-const fullSizeImg = imgModalWindow.querySelector(".pop-up__image");
-const fullSizeImgCap = imgModalWindow.querySelector(".pop-up__caption");
-
 // declaring and export the class
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, openImgModalWindow) {
     this._name = data.name;
     this._link = data.link;
     // property containes a whole template
     this._templateSelector = templateSelector;
+    this._openImgModalWindow = openImgModalWindow;
   }
 
   // private method to get a template element from the HTML document
@@ -44,15 +39,8 @@ export default class Card {
 
     this._element.querySelector(".elements__bin").addEventListener("click", () => {this._deleteCard()});
 
-    this._cardImg.addEventListener("click", () => {this._openImgModalWindow()});
+    this._cardImg.addEventListener("click", () => {this._openImgModalWindow(this._name, this._link)});
   }
-
-  _openImgModalWindow() {
-    fullSizeImg.src = this._link;
-    fullSizeImg.alt = this._name;
-    fullSizeImgCap.textContent = this._name;
-    openModal(imgModalWindow);
-  };
 
   _likeToggle() {
     this._likeBtn.classList.toggle("elements__butt_liked");

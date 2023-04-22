@@ -2,9 +2,6 @@
 import Card from "./components/Card.js";
 import FormValidator from "./components/FormValidator.js";
 
-// Import a varible used in closing fns
-import {imgModalWindow} from "./components/Card.js";
-
 // selectors
 const classSelectors = {
   typeErrorModeration: "pop-up__input_type-error",
@@ -17,7 +14,12 @@ const classSelectors = {
 // Get the modal elements
 const profileModalWindow = document.querySelector(".profile-pop-up");
 const cardModalWindow = document.querySelector(".card-pop-up");
-// const imgModalWindow = document.querySelector(".img-pop-up"); // del, used in Card class
+
+// del, used in Card class
+const imgModalWindow = document.querySelector(".img-pop-up");
+const fullSizeImg = imgModalWindow.querySelector(".pop-up__image");
+const fullSizeImgCap = imgModalWindow.querySelector(".pop-up__caption");
+
 const profileForm = document.querySelector(".pop-up__form");
 const profileFormEdit = document.querySelector(".pop-up__form-edit"); // used in formVal fn
 const cardForm = document.querySelector(".pop-up__form_submit"); // used in formVal fn
@@ -25,7 +27,7 @@ const cardForm = document.querySelector(".pop-up__form_submit"); // used in form
 // Get profile values and input values
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
-const nameInput = profileModalWindow.querySelector("#name"); // +
+const nameInput = profileModalWindow.querySelector("#name");
 const descriptionInput = profileModalWindow.querySelector("#description");
 
 // Get card input values
@@ -67,7 +69,7 @@ const primeCards = [
   }
 ];
 
-// new instances to validate forms
+// New instances to validate forms
 const formValidatorEdit = new FormValidator(classSelectors, profileFormEdit);
 formValidatorEdit.enableValidation();
 
@@ -106,6 +108,16 @@ const handleProfileFormSubmit = (evt) => {
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = descriptionInput.value;
   closeModal(profileModalWindow);
+  // reset the validation state of the form elements and remove any error messages.
+  formValidatorEdit.resetValidation();
+};
+
+// Function to open an image fully
+function openImgModalWindow(name, link) {
+  fullSizeImg.src = link;
+  fullSizeImg.alt = name;
+  fullSizeImgCap.textContent = name;
+  openModal(imgModalWindow);
 };
 
 // Functions to open card & img modal-windows
@@ -114,24 +126,31 @@ const openCardModalWindow = () => openModal(cardModalWindow);
 // Function to handle card form submission
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-  const newCard = {
-    name: placeNameIn.value,
-    link: placeImgLinkIn.value
-  };
-  renderCard(newCard);
-  evt.target.reset();
-  closeModal(cardModalWindow);
+  if (!placeNameIn.value || !placeImgLinkIn.value) {
+    // reset the validation state of the form elements and remove any error messages.
+    formValidatorAdd.resetValidation();
+  } else {
+    const newCard = {
+      name: placeNameIn.value,
+      link: placeImgLinkIn.value,
+    };
+    renderCard(newCard);
+    evt.target.reset();
+    closeModal(cardModalWindow);
+    // reset the validation state of the form elements and remove any error messages.
+    formValidatorAdd.resetValidation();
+  }
 };
 
 // function to create a new card
-const createCard = (data, cardId) => {
-  const card = new Card(data, cardId);
+const createCard = (data, cardId, openImgModalWindow) => {
+  const card = new Card(data, cardId, openImgModalWindow);
   return card.createCard();
 };
 
 // function to render new card
 const renderCard = (card) => {
-  const placeCard = createCard(card, "#place-card");
+  const placeCard = createCard(card, "#place-card", openImgModalWindow);
   cardsGrid.prepend(placeCard);
 };
 
@@ -144,7 +163,8 @@ profileAddBtn.addEventListener("click", openCardModalWindow);
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 cardForm.addEventListener("submit", handleCardFormSubmit);
 
-// Close buttons functions to close modals
+// Close buttons functions to close modals,
+// ReFuck these later into single forEach fn
 const profileModalCloseBtn = profileModalWindow.querySelector(".pop-up__close-butt");
 profileModalCloseBtn.addEventListener("click", () => closeModal(profileModalWindow));
 
