@@ -76,24 +76,26 @@ formValidatorEdit.enableValidation();
 const formValidatorAdd = new FormValidator(classSelectors, cardForm);
 formValidatorAdd.enableValidation();
 
+// Implemented in Pop-up class ↓
+
 // Functions to close modals when pressing escape button
-const closeByPressEsc = (evt) => {
-  if (evt.key === 'Escape') {
-    const openedModal = document.querySelector('.pop-up_opened');
-    closeModal(openedModal);
-  }
-};
+// const closeByPressEsc = (evt) => {
+//   if (evt.key === 'Escape') {
+//     const openedModal = document.querySelector('.pop-up_opened');
+//     closeModal(openedModal);
+//   }
+// };
 
 // Universal open/close functions
-const openModal = (modal) => {
-  modal.classList.add("pop-up_opened");
-  document.addEventListener("keydown", closeByPressEsc);
-};
+// const openModal = (modal) => {
+//   modal.classList.add("pop-up_opened");
+//   document.addEventListener("keydown", closeByPressEsc);
+// };
 
-const closeModal = (modal) => {
-  modal.classList.remove("pop-up_opened");
-  document.removeEventListener("keydown", closeByPressEsc);
-}
+// const closeModal = (modal) => {
+//   modal.classList.remove("pop-up_opened");
+//   document.removeEventListener("keydown", closeByPressEsc);
+// }
 
 // Function to fill in form with profile values
 const openProfileModalWindow = () => {
