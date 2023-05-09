@@ -30,7 +30,7 @@ function createCard(item) {
 }
 
 // Fn to pass text to inputs of profile form
-function formValues(value) {
+function passValues(value) {
   userInfo.setUserInfo(value.name, value.description);
   popupEditProfile.close();
 }
@@ -51,13 +51,13 @@ function openEditProfile() {
 }
 
 // Fn to open card modal window and create new card
-function OpenPopupAddCard() {
+function openPopupAddCard() {
   formValidatorCard.resetValidation();
-  PopupAddCard.open();
+  popupAddCard.open();
 }
 
 // An instance of Class to edit profile
-const popupEditProfile = new PopupWithForm(".profile-pop-up", formValues);
+const popupEditProfile = new PopupWithForm(".profile-pop-up", passValues);
 popupEditProfile.setEventListeners();
 
 // An instance of Class to render cards out of primeCards object
@@ -68,11 +68,11 @@ const cardPrimeCardsSection = new Section(
   ".elements__grid"
 );
 
-const PopupAddCard = new PopupWithForm(".card-pop-up", (item) => {
+const popupAddCard = new PopupWithForm(".card-pop-up", (item) => {
   cardPrimeCardsSection.addItem(createCard(item));
-  PopupAddCard.close();
+  popupAddCard.close();
 });
-PopupAddCard.setEventListeners();
+popupAddCard.setEventListeners();
 
 // an object of PopupWithImage Class
 const popupImgModalWindow = new PopupWithImage(".img-pop-up");
@@ -87,7 +87,7 @@ const formValidatorCard = new FormValidator(classSelectors, cardForm);
 formValidatorCard.enableValidation();
 
 // Buttons to open card and profile modals
-profileAddBtn.addEventListener("click", () => OpenPopupAddCard());
+profileAddBtn.addEventListener("click", () => openPopupAddCard());
 profileEditBtn.addEventListener("click", () => openEditProfile());
 
 cardPrimeCardsSection.renderItems(primeCards.reverse());

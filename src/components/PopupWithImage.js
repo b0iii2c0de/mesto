@@ -1,11 +1,10 @@
 import Popup from "./Popup.js";
-import { fullSizeImg, fullSizeImgCap } from "../utils/constants.js";
 
 export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    this._img = this._popupSelector.querySelector(fullSizeImg);
-    this._caption = this._popupSelector.querySelector(fullSizeImgCap);
+    this._img = this._popup.querySelector(".pop-up__image");
+    this._caption = this._popup.querySelector(".pop-up__caption");
   }
 
   open(data) {
