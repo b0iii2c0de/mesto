@@ -27,14 +27,14 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._popupSelector
       .querySelector(profileForm)
-      .addEventListeners("submit", (evt) => {
+      .addEventListener("submit", (evt) => {
         this._submitForm(evt, this._getInputValues());
       });
   }
 
   close() {
     super.close();
-    this._popupSelector.querySelector(profileForm).reset();
+    // this._popupSelector.querySelector(profileForm).reset();
     this._btnElement.classList.add(classSelectors.saveBtnElementOff);
     this._btnElement.setAttribute("disabled", "");
   }
