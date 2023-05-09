@@ -1,4 +1,5 @@
 // Styles import ↓
+import "../pages/index.css";
 
 // Import modules
 import Card from "../components/Card.js";
