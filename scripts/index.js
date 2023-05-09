@@ -1,146 +1,93 @@
+// Styles import ↓
+
 // Import modules
 import Card from "./components/Card.js";
 import FormValidator from "./components/FormValidator.js";
-import Popup from "./components/Popup.js";
 import PopupWithForm from "./components/PopupWithForm.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 import Section from "./components/Section.js";
 import UserInfo from "./components/UserInfo.js";
 
 // Import const-s
+// Set-up the paths properly!
 import {
   classSelectors,
-  profileModalWindow,
-  cardModalWindow,
-  profileForm,
   profileFormEdit,
   cardForm,
-  profileTitle,
-  profileSubtitle,
   nameInput,
   descriptionInput,
-  placeNameIn,
-  placeImgLinkIn,
   profileEditBtn,
   profileAddBtn,
-  cardsGrid,
-  primeCards
+  primeCards,
 } from "../utils/constants.js";
 
-// New instances to validate forms
+// Functions
+
+function createCard(item) {
+  return new Card(item, "#place-card", () =>
+    popupImgModalWindow.open(item)
+  ).createCard();
+}
+
+// Fn to pass text to inputs of profile form
+function formValues(value) {
+  userInfo.setUserInfo(value.name, value.description);
+  popupEditProfile.close();
+}
+
+const userInfo = new UserInfo({
+  titleSelector: ".profile__title",
+  subtitleSelector: ".profile__subtitle",
+});
+
+// Fn to open profile modal window
+function openEditProfile() {
+  const { title, subtitle } = userInfo.getUserInfo();
+  console.log(title);
+  nameInput.value = title;
+  descriptionInput.value = subtitle;
+  formValidatorEdit.resetValidation();
+  popupEditProfile.open();
+}
+
+// Fn to open card modal window and create new card
+function OpenPopupAddCard() {
+  formValidatorCard.resetValidation();
+  PopupAddCard.open();
+}
+
+// An instance of Class to edit profile
+const popupEditProfile = new PopupWithForm(".profile-pop-up", formValues);
+popupEditProfile.setEventListeners();
+
+// An instance of Class to render cards out of primeCards object
+const cardPrimeCardsSection = new Section(
+  {
+    renderer: (item) => cardPrimeCardsSection.addItem(createCard(item)),
+  },
+  ".elements__grid"
+);
+
+const PopupAddCard = new PopupWithForm(".card-pop-up", (item) => {
+  cardPrimeCardsSection.addItem(createCard(item));
+  PopupAddCard.close();
+});
+PopupAddCard.setEventListeners();
+
+// an object of PopupWithImage Class
+const popupImgModalWindow = new PopupWithImage(".img-pop-up");
+popupImgModalWindow.setEventListeners();
+
+// Profile modal form validation
 const formValidatorEdit = new FormValidator(classSelectors, profileFormEdit);
 formValidatorEdit.enableValidation();
 
-const formValidatorAdd = new FormValidator(classSelectors, cardForm);
-formValidatorAdd.enableValidation();
+// Card modal form validation
+const formValidatorCard = new FormValidator(classSelectors, cardForm);
+formValidatorCard.enableValidation();
 
-// Implemented in Pop-up class ↓
+// Buttons to open card and profile modals
+profileAddBtn.addEventListener("click", () => OpenPopupAddCard());
+profileEditBtn.addEventListener("click", () => openEditProfile());
 
-// Functions to close modals when pressing escape button
-// const closeByPressEsc = (evt) => {
-//   if (evt.key === 'Escape') {
-//     const openedModal = document.querySelector('.pop-up_opened');
-//     closeModal(openedModal);
-//   }
-// };
-
-// Universal open/close functions
-// const openModal = (modal) => {
-//   modal.classList.add("pop-up_opened");
-//   document.addEventListener("keydown", closeByPressEsc);
-// };
-
-// const closeModal = (modal) => {
-//   modal.classList.remove("pop-up_opened");
-//   document.removeEventListener("keydown", closeByPressEsc);
-// }
-
-// Function to fill in form with profile values
-const openProfileModalWindow = () => {
-  nameInput.value = profileTitle.textContent;
-  descriptionInput.value = profileSubtitle.textContent;
-  openModal(profileModalWindow);
-};
-
-// Function to handle profile form submission
-const handleProfileFormSubmit = (evt) => {
-  evt.preventDefault();
-  profileTitle.textContent = nameInput.value;
-  profileSubtitle.textContent = descriptionInput.value;
-  closeModal(profileModalWindow);
-  // reset the validation state of the form elements and remove any error messages.
-  formValidatorEdit.resetValidation();
-};
-
-// Function to open an image fully
-function openImgModalWindow(name, link) {
-  fullSizeImg.src = link;
-  fullSizeImg.alt = name;
-  fullSizeImgCap.textContent = name;
-  openModal(imgModalWindow);
-};
-
-// Functions to open card & img modal-windows
-const openCardModalWindow = () => openModal(cardModalWindow);
-
-// Function to handle card form submission
-const handleCardFormSubmit = (evt) => {
-  evt.preventDefault();
-  if (!placeNameIn.value || !placeImgLinkIn.value) {
-    // reset the validation state of the form elements and remove any error messages.
-    formValidatorAdd.resetValidation();
-  } else {
-    const newCard = {
-      name: placeNameIn.value,
-      link: placeImgLinkIn.value,
-    };
-    renderCard(newCard);
-    evt.target.reset();
-    closeModal(cardModalWindow);
-    // reset the validation state of the form elements and remove any error messages.
-    formValidatorAdd.resetValidation();
-  }
-};
-
-// function to create a new card
-const createCard = (data, cardId, openImgModalWindow) => {
-  const card = new Card(data, cardId, openImgModalWindow);
-  return card.createCard();
-};
-
-// function to render new card
-const renderCard = (card) => {
-  const placeCard = createCard(card, "#place-card", openImgModalWindow);
-  cardsGrid.prepend(placeCard);
-};
-
-// ↑
-primeCards.forEach(renderCard);
-
-// Event listeners to open and submit modals
-profileEditBtn.addEventListener("click", openProfileModalWindow);
-profileAddBtn.addEventListener("click", openCardModalWindow);
-profileForm.addEventListener("submit", handleProfileFormSubmit);
-cardForm.addEventListener("submit", handleCardFormSubmit);
-
-// Close buttons functions to close modals,
-// ReFuck these later into single forEach fn
-const profileModalCloseBtn = profileModalWindow.querySelector(".pop-up__close-butt");
-profileModalCloseBtn.addEventListener("click", () => closeModal(profileModalWindow));
-
-const cardModalCloseBtn = cardModalWindow.querySelector(".pop-up__close-butt");
-cardModalCloseBtn.addEventListener("click", () => closeModal(cardModalWindow));
-
-const imgModalCloseBtn = imgModalWindow.querySelector(".pop-up__close-butt");
-imgModalCloseBtn.addEventListener("click", () => closeModal(imgModalWindow));
-
-// An array with applied on it forEach method to close modals when click appears outside of a modals
-const modalWindows = [profileModalWindow, cardModalWindow, imgModalWindow];
-
-modalWindows.forEach(modalWindow => {
-  modalWindow.addEventListener('click', event => {
-    if (event.target === modalWindow) {
-      closeModal(modalWindow);
-    }
-  });
-});
+cardPrimeCardsSection.renderItems(primeCards.reverse());

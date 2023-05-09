@@ -19,7 +19,7 @@ export default class Card {
   }
 
   // public method to create card
-  createCard() {
+  createCard = () => {
     this._element = this._getTemplate();
     this._cardImg = this._element.querySelector(".elements__img");
 
@@ -35,11 +35,11 @@ export default class Card {
 
   _setEventListeners() {
     this._likeBtn = this._element.querySelector(".elements__butt");
-    this._likeBtn.addEventListener("click", () => {this._likeToggle()});
+    this._likeBtn.addEventListener("click", () => this._likeToggle());
 
     this._element.querySelector(".elements__bin").addEventListener("click", () => {this._deleteCard()});
 
-    this._cardImg.addEventListener("click", () => {this._openImgModalWindow(this._name, this._link)});
+    this._cardImg.addEventListener("click", () => this._openImgModalWindow(this._name, this._link));
   }
 
   _likeToggle() {

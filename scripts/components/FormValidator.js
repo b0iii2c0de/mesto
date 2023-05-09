@@ -11,14 +11,18 @@ export default class FormValidator {
 
   // private method to throw an error when input values
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(
+      `.${inputElement.id}-error`
+    );
     inputElement.classList.add(this._typeErrorModeration);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorActiveModeration);
   }
 
   _hideInputError(inputElement) {
-    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(
+      `.${inputElement.id}-error`
+    );
     // these two removes type, active classes from input
     inputElement.classList.remove(this._typeErrorModeration);
     errorElement.classList.remove(this._errorActiveModeration);
@@ -26,7 +30,7 @@ export default class FormValidator {
   }
 
   _checkInputValidity(inputElement) {
-    if(!inputElement.validity.valid) {
+    if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else {
       this._hideInputError(inputElement);
@@ -34,7 +38,9 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputElement));
+    this._inputList = Array.from(
+      this._formElement.querySelectorAll(this._inputElement)
+    );
     this._btnElement = this._formElement.querySelector(this._saveBtnElement);
     this._stateBtnToggle();
     this._inputList.forEach((inputElement) => {
@@ -49,13 +55,15 @@ export default class FormValidator {
   resetValidation() {
     this._stateBtnToggle();
     this._inputList.forEach((inputElement) => {
-      this._hideInputError(inputElement)
+      this._hideInputError(inputElement);
     });
   }
 
   // method to check imput validity
   _invalidInput() {
-    return this._inputList.some((inputElement) => {return !inputElement.validity.valid});
+    return this._inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
+    });
   }
 
   // method to switch the state of a button element
@@ -64,7 +72,6 @@ export default class FormValidator {
       this._btnElement.classList.add(this._saveBtnElementOff);
       this._btnElement.setAttribute("disabled", true);
     } else {
-      console.log(this._btnElement);
       this._btnElement.classList.remove(this._saveBtnElementOff);
       this._btnElement.removeAttribute("disabled");
     }
@@ -77,4 +84,4 @@ export default class FormValidator {
     });
     this._setEventListeners();
   }
-};
+}
