@@ -8,34 +8,34 @@ const classSelectors = {
 };
 
 // Get the modal elements
-const profileModalWindow = ".profile-pop-up";
-const cardModalWindow = ".card-pop-up";
+const profileModalWindow = document.querySelector(".profile-pop-up");
+const cardModalWindow = document.querySelector(".card-pop-up");
 
-// String literals to get img pop-up
-const imgModalWindow = ".img-pop-up";
-const fullSizeImg = ".pop-up__image";
-const fullSizeImgCap = ".pop-up__caption";
+// DEL, used in Card class ???
+const imgModalWindow = document.querySelector(".img-pop-up");
+const fullSizeImg = imgModalWindow.querySelector(".pop-up__image");
+const fullSizeImgCap = imgModalWindow.querySelector(".pop-up__caption");
 
-const profileForm = ".pop-up__form";
-const profileFormEdit = document.querySelector(".pop-up__form-edit"); // used in formVal instance
-const cardForm = document.querySelector(".pop-up__form_submit"); // used in formVal instance
+const profileForm = document.querySelector(".pop-up__form");
+const profileFormEdit = document.querySelector(".pop-up__form-edit"); // used in formVal fn
+const cardForm = document.querySelector(".pop-up__form_submit"); // used in formVal fn
 
 // Get profile values and input values
-const profileTitle = ".profile__title";
-const profileSubtitle = ".profile__subtitle";
-const nameInput = document.querySelector("#name");
-const descriptionInput = document.querySelector("#description");
+const profileTitle = document.querySelector(".profile__title");
+const profileSubtitle = document.querySelector(".profile__subtitle");
+const nameInput = profileModalWindow.querySelector("#name");
+const descriptionInput = profileModalWindow.querySelector("#description");
 
-// Get card input values, not used anywhere!
-const placeNameIn = document.querySelector("#place-name");
-const placeImgLinkIn = document.querySelector("#img-link");
+// Get card input values
+const placeNameIn = cardModalWindow.querySelector("#place-name");
+const placeImgLinkIn = cardModalWindow.querySelector("#img-link");
 
-// Get profile buttons
+// Get buttons
 const profileEditBtn = document.querySelector(".profile__edit-btn");
 const profileAddBtn = document.querySelector(".profile__add-btn");
 
 // Get template
-const cardsGrid = ".elements__grid";
+const cardsGrid = document.querySelector(".elements__grid");
 
 // An array of cards
 const primeCards = [
