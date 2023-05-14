@@ -19,8 +19,12 @@
   <main class="content">
     <section class="profile" aria-label="Профиль">
       <div class="profile__wrapper">
+        <div class="profile__wrapper-relative">
         <img src="<%=require('./images/content/avatar.jpg')%>" alt="Аватар" class="profile__avatar">
-        <div class="profile__info">
+        <button class="profile__edit-avatar" type="button">
+          <img class="profile__edit-pen" src="<%=require('./images/icons/profile__edit-avatar.svg')%>" alt="изображение ручки редактирования">
+           </div>
+           <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <p class="profile__subtitle">Исследователь океана</p>
           <button type="button" class="profile__edit-btn"></button>
@@ -38,13 +42,13 @@
   <section class="profile-pop-up pop-up" aria-label="Модалка для редакции профиля">
     <div class="pop-up__container">
       <h2 class="pop-up__title">Редактировать профиль</h2>
-      <form name="profile-edit-form" class="pop-up__form pop-up__form-edit" novalidate>
+      <form name="profileEditForm" class="pop-up__form pop-up__form-edit" novalidate>
         <label>
           <input type="text" placeholder="Имя" class="pop-up__input" id="name" name="name" minlength="2" maxlength="40" required>
           <span class="pop-up__input-error name-error"></span>
         </label>
         <label>
-          <input type="text" placeholder="Род деятельности" class="pop-up__input" id="description" name="description" minlength="2" maxlength="200" required>
+          <input type="text" placeholder="Род деятельности" class="pop-up__input" id="description" name="about" minlength="2" maxlength="200" required>
           <span class="pop-up__input-error description-error"></span>
         </label>
         <button type="submit" class="pop-up__sub-butt">Сохранить</button>
@@ -57,7 +61,7 @@
   <section class="card-pop-up pop-up" aria-label="Модалка для создания карточки">
     <div class="pop-up__container">
       <h2 class="pop-up__title">Новое место</h2>
-      <form class="pop-up__form pop-up__form_submit" name="place-add-form" novalidate>
+      <form class="pop-up__form pop-up__form_submit" name="placeAddForm" novalidate>
         <label>
           <input class="pop-up__input" type="text" id="place-name" name="name" placeholder="Название" minlength="2" maxlength="30" required>
           <span class="pop-up__input-error place-name-error"></span>
@@ -81,6 +85,34 @@
     </div>
   </section>
 
+  <!-- CONFORM POP-UP -->
+  <div class="confirmation-pop-up pop-up">
+    <div class="pop-up__container">
+      <button class="pop-up__close-butt" type="button"></button>
+      <h2 class="pop-up__title">Вы уверены?</h2>
+      <form class="pop-up__form">
+        <button class="pop-up__sub-butt" type="submit">
+          Да
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- UPDATE AVATAR -->
+  <div class="update-avatar-pop-up pop-up">
+    <div class="pop-up__container">
+      <button class="pop-up__close-butt" type="button"></button>
+      <h2 class="pop-up__title">Обновить аватар</h2>
+      <form class="pop-up__form" name="editAvatarForm" novalidate>
+        <label>
+          <input id="inputAvatar" class="pop-up__input" name="avatar" type="url" placeholder="Введите ссылку URL" required>
+          <span class="pop-up__input-error inputAvatar-error"></span>
+        </label>
+        <button class="pop-up__sub-butt" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer class="footer">
     <p class="footer__copyright">&copy; 2023. c0de b0iii</p>
@@ -93,7 +125,10 @@
       <button type="button" class="elements__bin" aria-label="Урна"></button>
       <div class="elements__wrapper">
         <h2 class="elements__name"></h2>
-        <button type="button" class="elements__butt" aria-label="Сирдешко"></button>
+        <div class="elements__container-like">
+          <button type="button" class="elements__butt" aria-label="Сердечко"></button>
+          <p class="elements__count-like"></p>
+        </div>
       </div>
     </li>
   </template>

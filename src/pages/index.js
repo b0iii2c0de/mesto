@@ -6,88 +6,204 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupConfirmation from "../components/PopupConfirmation.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 
-// Import const-s
+// Api import
+import Api from "../components/Api.js";
+
 import {
   classSelectors,
-  profileFormEdit,
-  cardForm,
-  nameInput,
-  descriptionInput,
-  profileEditBtn,
+  profileUpdateBtnAvatar,
   profileAddBtn,
-  primeCards,
+  profileEditBtn,
+  formEditProfile,
+  formAddProfile,
+  formUpdateAvatar,
+  nameProfileEdit,
+  aboutProfileEdit,
+  avatarProfileUpdateAvatar,
 } from "../utils/constants.js";
 
-// Functions
+let userId;
 
-function createCard(item) {
-  return new Card(item, "#place-card", () =>
-    popupImgModalWindow.open(item)
-  ).createCard();
-}
-
-// Fn to pass text to inputs of profile form
-function passValues(value) {
-  userInfo.setUserInfo(value.name, value.description);
-  popupEditProfile.close();
-}
-
-const userInfo = new UserInfo({
-  titleSelector: ".profile__title",
-  subtitleSelector: ".profile__subtitle",
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-65",
+  headers: {
+    authorization: "b7b4a57e-3ff3-4a0f-b13e-3d48be18375f",
+    "Content-Type": "application/json",
+  },
 });
 
-// Fn to open profile modal window
-function openEditProfile() {
-  const { title, subtitle } = userInfo.getUserInfo();
-  console.log(title);
-  nameInput.value = title;
-  descriptionInput.value = subtitle;
-  formValidatorEdit.resetValidation();
-  popupEditProfile.open();
+// The function of creating cards by an instance of the Card class
+function createCard(data) {
+  const card = new Card(
+    data,
+    "#place-card",
+    popupImgModalWindow,
+
+    userId,
+    async () => {
+      try {
+        const res = await api.addLike(data._id);
+        card.like();
+        card.likesCount(res);
+      } catch (err) {
+        return console.log(`Error message: ${err}`);
+      }
+    },
+    async () => {
+      try {
+        const res = await api.deletedLike(data._id);
+        card.dislike();
+        card.likesCount(res);
+      } catch (err) {
+        return console.log(`Error message: ${err}`);
+      }
+    },
+    () => {
+      popupConfirmation.open(card);
+    }
+  );
+
+  return card.createCard();
 }
 
-// Fn to open card modal window and create new card
-function openPopupAddCard() {
-  formValidatorCard.resetValidation();
-  popupAddCard.open();
+// Avatar update form
+async function submitFormAvatar(data) {
+  try {
+    const userProfile = await api.updateAvatar(data);
+    user.setUserInfo(userProfile);
+  } catch (err) {
+    return console.log(`Error message: ${err}`);
+  }
 }
 
-// An instance of Class to edit profile
-const popupEditProfile = new PopupWithForm(".profile-pop-up", passValues);
-popupEditProfile.setEventListeners();
+// Form for adding cards
+async function submitFormAddCard(data) {
+  try {
+    const newCard = await api.addCard(data);
+    cardSection.addItem(createCard(newCard));
+  } catch (err) {
+    return console.log(`Error message: ${err}`);
+  }
+}
 
-// An instance of Class to render cards out of primeCards object
-const cardPrimeCardsSection = new Section(
+// Profile editing form
+async function submitFormEdit(data) {
+  try {
+    const userProfile = await api.editProfileUser(data);
+    user.setUserInfo(userProfile);
+  } catch (err) {
+    return console.log(`Error message: ${err}`);
+  }
+}
+
+// Open img fullsize
+function popupImgModalWindow(name, link) {
+  popupImage.open(name, link);
+}
+
+const user = new UserInfo({
+  name: nameProfileEdit,
+  about: aboutProfileEdit,
+  avatar: avatarProfileUpdateAvatar,
+});
+
+// For each pop-up, create your own instance of the PopupWithForm
+const popupImage = new PopupWithImage(".img-pop-up");
+popupImage.setEventListeners();
+
+const popupAdd = new PopupWithForm(".card-pop-up", submitFormAddCard);
+
+popupAdd.setEventListeners();
+
+const popupEdit = new PopupWithForm(".profile-pop-up", submitFormEdit);
+
+popupEdit.setEventListeners();
+
+const popupAvatar = new PopupWithForm(
+  ".update-avatar-pop-up",
+  submitFormAvatar
+);
+
+popupAvatar.setEventListeners();
+
+profileEditBtn.addEventListener(
+  "click",
+  () => {
+    popupEdit.open();
+    popupEdit.setInputValue(user.getUserInfo());
+    formValidatorEdit.resetValidation();
+  },
+  false
+);
+
+profileUpdateBtnAvatar.addEventListener(
+  "click",
+  () => {
+    popupAvatar.open();
+    formValidatorAvatar.resetValidation();
+  },
+  false
+);
+
+profileAddBtn.addEventListener(
+  "click",
+  () => {
+    popupAdd.open();
+    formValidatorCard.resetValidation();
+  },
+  false
+);
+
+// For each form being validated, a new instance of the class FormValidator
+const formValidatorEdit = new FormValidator(classSelectors, formEditProfile);
+
+formValidatorEdit.enableValidation();
+
+const formValidatorCard = new FormValidator(classSelectors, formAddProfile);
+
+formValidatorCard.enableValidation();
+
+const formValidatorAvatar = new FormValidator(classSelectors, formUpdateAvatar);
+
+formValidatorAvatar.enableValidation();
+
+const popupConfirmation = new PopupConfirmation(
+  ".confirmation-pop-up",
+  async (card) => {
+    api
+      .deletedCard(card._id)
+      .then(() => {
+        card.remove();
+        popupConfirmation.close();
+      })
+      .catch((err) => console.log(`Error message: ${err}`));
+  }
+);
+
+popupConfirmation.setEventListeners();
+
+// Downloading cards from the server
+const cardSection = new Section(
   {
-    renderer: (item) => cardPrimeCardsSection.addItem(createCard(item)),
+    renderer: (data) => {
+      const card = createCard(data);
+
+      cardSection.addItem(card);
+    },
   },
   ".elements__grid"
 );
 
-const popupAddCard = new PopupWithForm(".card-pop-up", (item) => {
-  cardPrimeCardsSection.addItem(createCard(item));
-  popupAddCard.close();
-});
-popupAddCard.setEventListeners();
+// Rendering cards from the server + rendering user data
+Promise.all([api.getUser(), api.getInitialCards()])
+  .then(([userProfile, cards]) => {
+    user.setUserInfo(userProfile);
+    userId = userProfile._id;
+    cardSection.renderItems(cards.reverse());
+  })
 
-// an object of PopupWithImage Class
-const popupImgModalWindow = new PopupWithImage(".img-pop-up");
-popupImgModalWindow.setEventListeners();
-
-// Profile modal form validation
-const formValidatorEdit = new FormValidator(classSelectors, profileFormEdit);
-formValidatorEdit.enableValidation();
-
-// Card modal form validation
-const formValidatorCard = new FormValidator(classSelectors, cardForm);
-formValidatorCard.enableValidation();
-
-// Buttons to open card and profile modals
-profileAddBtn.addEventListener("click", () => openPopupAddCard());
-profileEditBtn.addEventListener("click", () => openEditProfile());
-
-cardPrimeCardsSection.renderItems(primeCards.reverse());
+  .catch((err) => console.log(`Error message: ${err}`));
