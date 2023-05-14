@@ -56,7 +56,7 @@ export default class Card {
       this._cardElement = element.cloneNode(true);
       this._likeBtn = this._cardElement.querySelector(".elements__butt");
       console.log(this._cardElement);
-      // Устанавливаю счетчик для подсчета лайков
+      // Set-up a like counter
       this._likesCount = this._cardElement.querySelector(
         ".elements__count-like"
       );
