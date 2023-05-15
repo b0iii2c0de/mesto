@@ -72,32 +72,47 @@ function createCard(data) {
 
 // Avatar update form
 async function submitFormAvatar(data) {
-  try {
-    const userProfile = await api.updateAvatar(data);
-    user.setUserInfo(userProfile);
-  } catch (err) {
-    return console.log(`Error message: ${err}`);
-  }
+  popupAvatar.updateText();
+  api
+    .updateAvatar(data)
+    .then((ans) => {
+      user.setUserInfo(ans);
+      popupAvatar.close();
+    })
+
+    .catch((err) => {
+      console.log(`Error message: ${err}`);
+    });
 }
 
 // Form for adding cards
 async function submitFormAddCard(data) {
-  try {
-    const newCard = await api.addCard(data);
-    cardSection.addItem(createCard(newCard));
-  } catch (err) {
-    return console.log(`Error message: ${err}`);
-  }
+  popupAdd.updateText();
+  api
+    .addCard(data)
+    .then((ans) => {
+      cardSection.addItem(createCard(ans));
+      popupAdd.close();
+    })
+
+    .catch((err) => {
+      console.log(`Error message: ${err}`);
+    });
 }
 
 // Profile editing form
 async function submitFormEdit(data) {
-  try {
-    const userProfile = await api.editProfileUser(data);
-    user.setUserInfo(userProfile);
-  } catch (err) {
-    return console.log(`Error message: ${err}`);
-  }
+  popupEdit.updateText();
+  api
+    .editProfileUser(data)
+    .then((ans) => {
+      user.setUserInfo(ans);
+      popupEdit.close();
+    })
+
+    .catch((err) => {
+      console.log(`Error message: ${err}`);
+    });
 }
 
 // Open img fullsize
